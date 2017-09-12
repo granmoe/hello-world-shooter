@@ -25,7 +25,7 @@ namespace hello_world_shooter
 
             var center = (GraphicsDevice.Viewport.Width / 2) - (PLAYER_WIDTH / 2);
             enemy = new Rectangle(x: center, y: 0, width: PLAYER_WIDTH, height: PLAYER_WIDTH);
-            player = new Player(center, GraphicsDevice.Viewport.Height - PLAYER_WIDTH, 0, 0, PLAYER_WIDTH, PLAYER_WIDTH, Color.WhiteSmoke);
+            player = new Player(GraphicsDevice, center, GraphicsDevice.Viewport.Height - PLAYER_WIDTH, 0, 0, PLAYER_WIDTH, PLAYER_WIDTH, Color.WhiteSmoke);
 
             Color[] data = new Color[PLAYER_WIDTH * PLAYER_WIDTH];
             for (int i = 0; i < data.Length; ++i)
@@ -66,7 +66,7 @@ namespace hello_world_shooter
 
             spriteBatch.Begin();
             spriteBatch.Draw(rectTexture, enemyPosition, Color.White);
-            player.Draw();
+            player.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
