@@ -9,7 +9,7 @@ namespace hello_world_shooter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Rectangle enemy;
-        Rectangle player;
+        Player player;
         Texture2D rectTexture;
         int PLAYER_WIDTH = 100;
 
@@ -25,7 +25,7 @@ namespace hello_world_shooter
 
             var center = (GraphicsDevice.Viewport.Width / 2) - (PLAYER_WIDTH / 2);
             enemy = new Rectangle(x: center, y: 0, width: PLAYER_WIDTH, height: PLAYER_WIDTH);
-            player = new Rectangle(x: center, y: GraphicsDevice.Viewport.Height - PLAYER_WIDTH, width: PLAYER_WIDTH, height: PLAYER_WIDTH);
+            player = new Player(center, GraphicsDevice.Viewport.Height - PLAYER_WIDTH, 0, 0, PLAYER_WIDTH, PLAYER_WIDTH, Color.WhiteSmoke);
 
             Color[] data = new Color[PLAYER_WIDTH * PLAYER_WIDTH];
             for (int i = 0; i < data.Length; ++i)
@@ -63,11 +63,10 @@ namespace hello_world_shooter
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             var enemyPosition = new Vector2(enemy.Left, enemy.Top);
-            var playerPosition = new Vector2(player.Left, player.Top);
 
             spriteBatch.Begin();
             spriteBatch.Draw(rectTexture, enemyPosition, Color.White);
-            spriteBatch.Draw(rectTexture, playerPosition, Color.White);
+            player.Draw();
             spriteBatch.End();
 
             base.Draw(gameTime);
