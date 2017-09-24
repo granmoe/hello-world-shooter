@@ -14,7 +14,7 @@ public class Bullet : GameObject
     public void Update(GameTime gameTime)
     {
         // TODO: Move bullet towards top of screen
-        var delta = (float)gameTime.ElapsedGameTime.Milliseconds;
+        float delta = (float)gameTime.ElapsedGameTime.Milliseconds;
         Y -= Vy * delta / 100;
     }
 }

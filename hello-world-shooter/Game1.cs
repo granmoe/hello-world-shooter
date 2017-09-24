@@ -13,7 +13,7 @@ namespace hello_world_shooter
         Rectangle enemy;
         Player player;
         Texture2D rectTexture;
-        int PLAYER_WIDTH = 100;
+        int PLAYER_WIDTH = 40;
 
         public Game1()
         {

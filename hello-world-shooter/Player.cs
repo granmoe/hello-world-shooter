@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 public class Player : GameObject
 {
-    private TimeSpan BulletDelay = new TimeSpan(0, 0, 1);
+    private TimeSpan BulletDelay = new TimeSpan(0, 0, 0, 0, 500);
     private TimeSpan LastBulletTime;
     public List<Bullet> Bullets = new List<Bullet>();
     public Player(GraphicsDevice graphicsDevice, float x, float y, float vx, float vy, int width, int height, Color color)
@@ -17,7 +17,19 @@ public class Player : GameObject
     public void Update(GameTime gameTime)
     {
         if (Keyboard.GetState().IsKeyDown(Keys.Space))
+        {
             this.Shoot(gameTime);
+        }
+
+        if (Keyboard.GetState().IsKeyDown(Keys.Left))
+        {
+            X = Math.Max(X - (float)gameTime.ElapsedGameTime.Milliseconds, 0);
+        }
+        else if (Keyboard.GetState().IsKeyDown(Keys.Right))
+        {
+            X = Math.Min(X + (float)gameTime.ElapsedGameTime.Milliseconds, GraphicsDevice.Viewport.Width - Width);
+        }
+
         Bullets.ForEach(bullet => bullet.Update(gameTime));
     }
 
@@ -25,7 +37,10 @@ public class Player : GameObject
     {
         if (LastBulletTime == TimeSpan.Zero || gameTime.TotalGameTime.Subtract(LastBulletTime).CompareTo(BulletDelay) >= 0)
         {
-            Bullets.Add(new Bullet(GraphicsDevice, x: 400, y: 360, vx: 0, vy: 10, width: 10, height: 10, color: Color.Red));
+            int bulletWidth = 10;
+            float bulletX = X + (Width / 2);
+            float bulletY = Y - bulletWidth;
+            Bullets.Add(new Bullet(GraphicsDevice, x: bulletX, y: bulletY, vx: 0, vy: 80, width: bulletWidth, height: bulletWidth, color: Color.Red));
             LastBulletTime = gameTime.TotalGameTime;
         }
     }

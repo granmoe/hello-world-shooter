@@ -6,14 +6,14 @@ public class GameObject
 {
     Rectangle Rectangle;
     Texture2D Texture { get; }
-    protected GraphicsDevice GraphicsDevice;
     public float X { get; set; }
     public float Y { get; set; }
     public float Vx { get; set; }
     public float Vy { get; set; }
-    int Width { get; set; }
-    int Height { get; set; }
+    protected int Width { get; set; }
+    protected int Height { get; set; }
     Color Color;
+    protected GraphicsDevice GraphicsDevice;
 
     public GameObject(GraphicsDevice graphicsDevice, float x, float y, float vx, float vy, int width, int height, Color color)
     {
