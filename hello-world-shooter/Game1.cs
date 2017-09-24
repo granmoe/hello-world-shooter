@@ -12,7 +12,6 @@ namespace hello_world_shooter
         SpriteBatch spriteBatch;
         Enemy enemy;
         Player player;
-        Texture2D rectTexture;
         int PLAYER_WIDTH = 40;
 
         public Game1()
@@ -29,12 +28,6 @@ namespace hello_world_shooter
             enemy = new Enemy(GraphicsDevice, center, 0, GraphicsDevice.Viewport.Width - (PLAYER_WIDTH / 2), 0, PLAYER_WIDTH, PLAYER_WIDTH, Color.WhiteSmoke);
             player = new Player(GraphicsDevice, center, GraphicsDevice.Viewport.Height - PLAYER_WIDTH, 0, 0, PLAYER_WIDTH, PLAYER_WIDTH, Color.WhiteSmoke);
 
-            Color[] data = new Color[PLAYER_WIDTH * PLAYER_WIDTH];
-            for (int i = 0; i < data.Length; ++i)
-                data[i] = Color.PapayaWhip;
-            rectTexture = new Texture2D(GraphicsDevice, PLAYER_WIDTH, PLAYER_WIDTH);
-            rectTexture.SetData(data);
-
             base.Initialize();
         }
 
@@ -43,13 +36,12 @@ namespace hello_world_shooter
             spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // Do this in player class?
+            // Where is the best place to do this?
             // if player.bullets.any(intersects(enemy)
             //    GameState = GameStates.Won
             player.Update(gameTime);
@@ -57,7 +49,6 @@ namespace hello_world_shooter
             base.Update(gameTime);
         }
 
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
