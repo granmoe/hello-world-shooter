@@ -6,6 +6,8 @@ namespace hello_world_shooter
 {
     public class Game1 : Game
     {
+        enum GameStates {Won, Lost, Playing};
+        GameStates GameState = GameStates.Playing;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Rectangle enemy;
@@ -41,19 +43,16 @@ namespace hello_world_shooter
             spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
-        }
-
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
+            // Do this in player class?
+            // if player.bullets.any(intersects(enemy)
+            //    GameState = GameStates.Won
+            player.Update(gameTime);
             base.Update(gameTime);
         }
 
