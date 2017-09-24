@@ -26,7 +26,7 @@ public class GameObject
         Height = height;
         Color = color;
 
-        var center = (graphicsDevice.Viewport.Width / 2) - (width / 2);
+        int center = (graphicsDevice.Viewport.Width / 2) - (width / 2);
         Rectangle = new Rectangle(x: center, y: graphicsDevice.Viewport.Height - width, width: width, height: width);
         Color[] data = new Color[width * width];
         for (int i = 0; i < data.Length; ++i)

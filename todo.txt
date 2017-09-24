@@ -1,0 +1,9 @@
+TODO
+
+Slow down player movement (and enemy movement?)
+Make enemy move randomly
+Hit detection: bullets and enemy
+Hit detection: enemy bullets and player
+Win/lose (started on this w the GameStates thing)
+Restart
+Sound FX (shooting, hit by enemy, hit enemy, win, lose, beat all levels, music)
