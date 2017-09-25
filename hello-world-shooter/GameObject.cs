@@ -10,8 +10,8 @@ public class GameObject
     public float Y { get; set; }
     public float Vx { get; set; }
     public float Vy { get; set; }
-    protected int Width { get; set; }
-    protected int Height { get; set; }
+    public int Width { get; set; }
+    public int Height { get; set; }
     Color Color;
     protected GraphicsDevice GraphicsDevice;
 

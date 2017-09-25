@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,7 +13,7 @@ namespace hello_world_shooter
         SpriteBatch spriteBatch;
         Enemy enemy;
         Player player;
-        int PLAYER_WIDTH = 40;
+        int PLAYER_WIDTH = 50;
 
         public Game1()
         {
@@ -36,14 +37,36 @@ namespace hello_world_shooter
             spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
+        // start and end must be sorted low to high
+        private bool LinesIntersect(float lineOneStart, float lineOneEnd, float lineTwoStart, float lineTwoEnd)
+        {
+            return (Math.Min(lineOneEnd, lineTwoEnd) - Math.Max(lineOneStart, lineTwoStart)) > 0;
+        }
+
+        private bool GameObjectsIntersect(GameObject first, GameObject second)
+        {
+            bool yIntersects = LinesIntersect(first.X, first.X + first.Width, second.X, second.X + second.Width);
+            bool xIntersects = LinesIntersect(first.Y, first.Y + first.Height, second.Y, second.Y + second.Height);
+            return yIntersects && xIntersects;
+        }
+
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // Where is the best place to do this?
-            // if player.bullets.any(intersects(enemy)
-            //    GameState = GameStates.Won
+            if (player.Bullets.Exists(bullet => GameObjectsIntersect(bullet, enemy)))
+            {
+                Console.WriteLine("ENEMY WAS HIT");
+                // TODO: Change game state to "won"
+            };
+            // Tie goes to the player (check player bullets first). Odds are probably incredibly low that both bullets will hit in the same frame.
+            if (enemy.Bullets.Exists(bullet => GameObjectsIntersect(bullet, player)))
+            {
+                Console.WriteLine("PLAYER WAS HIT");
+                // TODO: Change game state to "lost"
+            };
+
             player.Update(gameTime);
             enemy.Update(gameTime);
             base.Update(gameTime);
