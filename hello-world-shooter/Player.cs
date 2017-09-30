@@ -18,9 +18,7 @@ public class Player : GameObject
     public void Update(GameTime gameTime)
     {
         if (Keyboard.GetState().IsKeyDown(Keys.Space))
-        {
             this.Shoot(gameTime);
-        }
 
         if (Keyboard.GetState().IsKeyDown(Keys.Left))
         {

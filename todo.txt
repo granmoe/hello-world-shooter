@@ -1,15 +1,12 @@
 TODO
 
-Hit detection: bullets and enemy
-Hit detection: enemy bullets and player
-
-Win/lose (started on this w the GameStates thing)
+Fix bullets memory leak
 
 OPTIMIZATIONS
 
-Paused game state, press any key to enter play mode, press p to pause (to get around enemy hitting player immediately)
-Correct for enemy getting stuck on edges
-Fix bullets memory leak
-Restart
 Spin bullets or transform in some cool way
+Paused game state, press any key to enter play mode, press p to pause
+game begins paused (to get around enemy hitting player immediately)
+Correct for enemy getting stuck on edges
 Sound FX (shooting, hit by enemy, hit enemy, win, lose, beat all levels, music)
+Look into whether game is running faster/slower at different times and how to normalize this

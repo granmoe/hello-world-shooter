@@ -82,9 +82,7 @@ public class Enemy : GameObject
 
         MovementIndex++;
         if (MovementIndex > Movements.Count - 1)
-        {
             MovementIndex = 0;
-        }
     }
 
     public override void Draw(SpriteBatch spriteBatch)
